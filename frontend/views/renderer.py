@@ -5,7 +5,7 @@ Responsable de toda la visualización del reloj
 import pygame
 import math
 from frontend.utils.utils import polar_to_cartesian
-from backend.domain.models.AnalogClockList import AnalogClockList
+from backend.domain.models.AnalogClock import AnalogClock
 from frontend.config import ui_constants
 from config.models import ClockModel, MODEL_DATA
 from config import settings
@@ -32,7 +32,7 @@ class Renderer:
         self.config = settings.MODEL_CONFIGS[self.model]
 
         # Inicializar lista circular con números del reloj según modelo
-        self.clock_numbers = AnalogClockList(MODEL_DATA[self.model])
+        self.clock_numbers = AnalogClock(MODEL_DATA[self.model])
 
     def set_model(self, model):
         """
@@ -43,7 +43,7 @@ class Renderer:
         """
         self.model = model
         self.config = settings.MODEL_CONFIGS[self.model]
-        self.clock_numbers = AnalogClockList(MODEL_DATA[self.model])
+        self.clock_numbers = AnalogClock(MODEL_DATA[self.model])
 
     def draw_clock_face(self, surface):
         """

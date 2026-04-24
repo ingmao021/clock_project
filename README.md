@@ -160,6 +160,7 @@ source .venv/bin/activate
 ---
 
 ## 🖼️ Imagen del proyecto en ejecución:
+
 ![Reloj Analógico](assets/img.png)
 
 ---
