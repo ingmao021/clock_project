@@ -101,6 +101,7 @@ sudo apt-get install python3.11
 
 ## 🧩Librería que se utiliza: 
 - pygame 
+- pytz
 ---
 
 ## 🛠️ Instalación 
