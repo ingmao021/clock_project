@@ -1,0 +1,49 @@
+"""
+Constantes específicas del frontend UI
+Importa de config/settings pero puede tener constantes adicionales de UI
+"""
+from config import settings
+
+# Re-exportar constantes principales
+APP_WIDTH = settings.APP_WIDTH
+APP_HEIGHT = settings.APP_HEIGHT
+CLOCK_CENTER = settings.CLOCK_CENTER
+CLOCK_RADIUS = settings.CLOCK_RADIUS
+
+# Colores
+COLOR_CLOCK_FACE = settings.COLOR_CLOCK_FACE
+COLOR_CLOCK_BORDER = settings.COLOR_CLOCK_BORDER
+COLOR_TICK_MAJOR = settings.COLOR_TICK_MAJOR
+COLOR_TICK_MINOR = settings.COLOR_TICK_MINOR
+COLOR_HOUR_HAND = settings.COLOR_HOUR_HAND
+COLOR_MINUTE_HAND = settings.COLOR_MINUTE_HAND
+COLOR_SECOND_HAND = settings.COLOR_SECOND_HAND
+COLOR_CENTER_PIN = settings.COLOR_CENTER_PIN
+
+# Propiedades de dibujo
+TICK_MAJOR_WIDTH = settings.TICK_MAJOR_WIDTH
+TICK_MINOR_WIDTH = settings.TICK_MINOR_WIDTH
+HOUR_HAND_WIDTH = settings.HOUR_HAND_WIDTH
+MINUTE_HAND_WIDTH = settings.MINUTE_HAND_WIDTH
+SECOND_HAND_WIDTH = settings.SECOND_HAND_WIDTH
+CENTER_PIN_RADIUS = settings.CENTER_PIN_RADIUS
+
+# Proporciones
+HOUR_HAND_LENGTH_RATIO = settings.HOUR_HAND_LENGTH_RATIO
+MINUTE_HAND_LENGTH_RATIO = settings.MINUTE_HAND_LENGTH_RATIO
+SECOND_HAND_LENGTH_RATIO = settings.SECOND_HAND_LENGTH_RATIO
+
+# Fuentes
+FONT_NAME = settings.FONT_NAME
+FONT_SIZE = settings.FONT_SIZE
+FONT_BOLD = settings.FONT_BOLD
+
+# Velocidades
+FPS = settings.FPS
+MOUSE_DETECTION_RADIUS = settings.MOUSE_DETECTION_RADIUS
+
+# Ventana
+WINDOW_TITLE = settings.WINDOW_TITLE
+ASSET_ICON_PATH = settings.ASSET_ICON_PATH
+ASSET_BACKGROUND_PATH = settings.ASSET_BACKGROUND_PATH
+
