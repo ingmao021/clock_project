@@ -43,6 +43,7 @@ class TimezoneService:
         """Inicializa el servicio de zonas horarias."""
         self.current_timezone = pytz.UTC
         self.current_country = "Colombia"
+        self.set_timezone(self.current_country)  # Establecer la zona horaria por defecto
 
     def get_available_countries(self):
         """

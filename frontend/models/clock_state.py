@@ -2,6 +2,7 @@
 Modelo de estado del reloj - Almacena el estado local del reloj
 Separa los datos de la presentación
 """
+from config.models import ClockModel
 
 
 class ClockState:
@@ -14,6 +15,7 @@ class ClockState:
         self.manual_seconds = None
         self.hands_ends = (None, None, None)  # (hour_end, minute_end, second_end)
         self.selected_country = "Colombia"  # País por defecto
+        self.selected_model = ClockModel.CLASSIC  # Modelo por defecto
 
     def set_angles(self, hour, minute, second):
         """
@@ -106,6 +108,24 @@ class ClockState:
         """
         return self.selected_country
 
+    def set_selected_model(self, model):
+        """
+        Establece el modelo de reloj seleccionado.
+
+        Args:
+            model: Instancia de ClockModel
+        """
+        self.selected_model = model
+
+    def get_selected_model(self):
+        """
+        Obtiene el modelo de reloj seleccionado.
+
+        Returns:
+            Instancia de ClockModel
+        """
+        return self.selected_model
+
     def reset(self):
         """Reinicia el estado del reloj a valores por defecto."""
         self.clock_hands_angles = {'hour': 90, 'minute': 90, 'second': 90}
@@ -113,3 +133,4 @@ class ClockState:
         self.manual_seconds = None
         self.hands_ends = (None, None, None)
         self.selected_country = "Colombia"
+        self.selected_model = ClockModel.CLASSIC

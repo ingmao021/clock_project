@@ -3,8 +3,11 @@ from backend.domain.models.Time import Time
 
 class AnalogClockList:
     # La ultima posicion se conecta de nuevo con el inicio, lo que facilita el recorrido cíclico
-    def __init__(self):
+    def __init__(self, data_list=None):
         self.head = None  # La lista inicia vacía
+        if data_list:
+            for data in data_list:
+                self.insert(data)
 
     def insert(self, data):
         # Si la lista est vacía el nodo se auto-referencia en sus punteros next y prev

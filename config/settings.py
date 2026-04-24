@@ -56,3 +56,53 @@ DEGREES_PER_MINUTE_SECOND = 0.1  # Movimiento suave del minutero
 # ==================== VENTANA ====================
 WINDOW_TITLE = "Reloj Vintage"
 
+
+# ==================== MODELOS DE RELOJ ====================
+from config.models import ClockModel
+
+MODEL_CONFIGS = {
+    ClockModel.CLASSIC: {
+        "COLOR_CLOCK_FACE": (255, 250, 240),  # Beige claro
+        "COLOR_CLOCK_BORDER": (5, 25, 25),    # Azul oscuro
+        "COLOR_TICK_MAJOR": (5, 25, 25),      # Azul oscuro
+        "COLOR_TICK_MINOR": (100, 100, 100),  # Gris
+        "COLOR_HOUR_HAND": (34, 139, 34),     # Verde oscuro
+        "COLOR_MINUTE_HAND": (5, 25, 25),     # Azul oscuro
+        "COLOR_SECOND_HAND": (153, 0, 0),     # Rojo oscuro
+        "BORDER_WIDTH": 4,
+        "FONT_NAME": "Times New Roman",
+    },
+    ClockModel.ROMAN: {
+        "COLOR_CLOCK_FACE": (255, 250, 240),  # Beige claro
+        "COLOR_CLOCK_BORDER": (5, 25, 25),    # Azul oscuro
+        "COLOR_TICK_MAJOR": (5, 25, 25),      # Azul oscuro
+        "COLOR_TICK_MINOR": (100, 100, 100),  # Gris
+        "COLOR_HOUR_HAND": (34, 139, 34),     # Verde oscuro
+        "COLOR_MINUTE_HAND": (5, 25, 25),     # Azul oscuro
+        "COLOR_SECOND_HAND": (153, 0, 0),     # Rojo oscuro
+        "BORDER_WIDTH": 4,
+        "FONT_NAME": "Times New Roman",  # Podría cambiarse a fuente romana si disponible
+    },
+    ClockModel.BULOVA_VINTAGE: {
+        "COLOR_CLOCK_FACE": (245, 245, 220),  # Beige crema
+        "COLOR_CLOCK_BORDER": (184, 134, 11), # Dorado
+        "COLOR_TICK_MAJOR": (184, 134, 11),   # Dorado
+        "COLOR_TICK_MINOR": (169, 169, 169),  # Gris claro
+        "COLOR_HOUR_HAND": (184, 134, 11),    # Dorado
+        "COLOR_MINUTE_HAND": (184, 134, 11),  # Dorado
+        "COLOR_SECOND_HAND": (139, 69, 19),   # Marrón
+        "BORDER_WIDTH": 6,
+        "FONT_NAME": "Times New Roman",
+    },
+    ClockModel.DECORATIVE_NO_FRAME: {
+        "COLOR_CLOCK_FACE": (255, 255, 255),  # Blanco
+        "COLOR_CLOCK_BORDER": (255, 255, 255),# Blanco (sin borde visible)
+        "COLOR_TICK_MAJOR": (200, 200, 200),  # Gris claro
+        "COLOR_TICK_MINOR": (220, 220, 220),  # Gris muy claro
+        "COLOR_HOUR_HAND": (0, 0, 0),         # Negro
+        "COLOR_MINUTE_HAND": (0, 0, 0),       # Negro
+        "COLOR_SECOND_HAND": (100, 100, 100), # Gris
+        "BORDER_WIDTH": 1,  # Borde muy delgado
+        "FONT_NAME": "Arial",
+    },
+}

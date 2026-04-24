@@ -6,6 +6,7 @@ from frontend.models.clock_state import ClockState
 from frontend.controllers.input_handler import InputHandler
 from frontend.views.renderer import Renderer
 from frontend.components.country_selector import CountrySelector
+from frontend.components.model_selector import ModelSelector
 from backend.services.clock_service import ClockService
 import pygame
 
@@ -24,7 +25,7 @@ class UIService:
         """
         self.state = ClockState()
         self.clock_service = ClockService()
-        self.renderer = Renderer(width, height, radius)
+        self.renderer = Renderer(width, height, radius, self.state.get_selected_model())
         self.input_handler = InputHandler(self.renderer.center)
 
         # Inicializar selector de países
@@ -32,6 +33,10 @@ class UIService:
         display_names = [self.clock_service.timezone_service.get_display_name(c) for c in countries]
         self.country_selector = CountrySelector(countries, display_names, 15, 15, 255, 35)
         self.country_selector.set_country(self.clock_service.get_current_country())
+
+        # Inicializar selector de modelos
+        self.model_selector = ModelSelector(650, 15, 100, 35)
+        self.model_selector.set_model(self.state.get_selected_model())
 
     def initialize(self):
         """Inicializa el estado del reloj con la hora del sistema."""
@@ -70,6 +75,11 @@ class UIService:
             selected_country = self.country_selector.handle_click(event.pos)
             if selected_country:
                 self._handle_country_change(selected_country)
+
+            # Manejar clics en el selector de modelos
+            selected_model = self.model_selector.handle_click(event.pos)
+            if selected_model:
+                self._handle_model_change(selected_model)
 
         return action
 
@@ -117,6 +127,9 @@ class UIService:
         # Dibujar selector de países
         current_display = self.clock_service.timezone_service.get_display_name(self.state.get_selected_country())
         self.renderer.draw_country_selector(surface, self.country_selector, current_display)
+
+        # Dibujar selector de modelos
+        self.renderer.draw_model_selector(surface, self.model_selector, self.state.get_selected_model())
 
         # Dibujar zona horaria actual
         self.renderer.draw_current_timezone(surface, current_display)
@@ -167,3 +180,13 @@ class UIService:
         self.state.set_angles_dict(angles)
         self.state.set_manual_mode(False)
         self.input_handler.active_hand = None
+
+    def _handle_model_change(self, new_model):
+        """
+        Maneja el cambio de modelo.
+
+        Args:
+            new_model: Nuevo modelo seleccionado
+        """
+        self.state.set_selected_model(new_model)
+        self.renderer.set_model(new_model)

@@ -28,6 +28,11 @@ Se puede elijir un pais para mira la hora actual de la ciudad principal de ese p
 - Brasil (Sao Paulo)
 - México (Mexico City)
 
+Se pueden elegir entre 4 modelos de reloj con estilos visuales distintos:
+- Clásico: Modelo por defecto con números arábigos estándar
+- Romano: Números romanos (I, II, III, etc.)
+- Vintage: Estilo Bulova retro con números arábigos
+- Decorativo: Diseño sin marco con números arábigos
 ---
 
 ## ✨ Características
