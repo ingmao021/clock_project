@@ -5,7 +5,9 @@ Responsable de coordinar el flujo de eventos y actualizaciones
 from frontend.models.clock_state import ClockState
 from frontend.controllers.input_handler import InputHandler
 from frontend.views.renderer import Renderer
+from frontend.components.country_selector import CountrySelector
 from backend.services.clock_service import ClockService
+import pygame
 
 
 class UIService:
@@ -25,10 +27,17 @@ class UIService:
         self.renderer = Renderer(width, height, radius)
         self.input_handler = InputHandler(self.renderer.center)
 
+        # Inicializar selector de países
+        countries = self.clock_service.get_available_countries()
+        display_names = [self.clock_service.timezone_service.get_display_name(c) for c in countries]
+        self.country_selector = CountrySelector(countries, display_names, 15, 15, 255, 35)
+        self.country_selector.set_country(self.clock_service.get_current_country())
+
     def initialize(self):
         """Inicializa el estado del reloj con la hora del sistema."""
         angles = self.clock_service.update_from_system()
         self.state.set_angles_dict(angles)
+        self.state.set_selected_country(self.clock_service.get_current_country())
 
     def handle_event(self, event):
         """
@@ -55,6 +64,12 @@ class UIService:
             self._handle_end_drag()
         elif action == "update_angle":
             self._handle_update_angle(data)
+
+        # Manejar clics en el selector de países
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            selected_country = self.country_selector.handle_click(event.pos)
+            if selected_country:
+                self._handle_country_change(selected_country)
 
         return action
 
@@ -99,6 +114,13 @@ class UIService:
         hands_ends = self.renderer.draw_hands(surface, self.state.get_angles())
         self.state.set_hands_ends(*hands_ends)
 
+        # Dibujar selector de países
+        current_display = self.clock_service.timezone_service.get_display_name(self.state.get_selected_country())
+        self.renderer.draw_country_selector(surface, self.country_selector, current_display)
+
+        # Dibujar zona horaria actual
+        self.renderer.draw_current_timezone(surface, current_display)
+
     def _handle_reset(self):
         """Maneja el reinicio a la hora del sistema."""
         self.clock_service.reset_to_system_time()
@@ -131,4 +153,17 @@ class UIService:
             angles[hand] = angle
             self.state.set_angles_dict(angles)
 
+    def _handle_country_change(self, new_country):
+        """
+        Maneja el cambio de país.
 
+        Args:
+            new_country: Nuevo país seleccionado
+        """
+        self.clock_service.set_timezone(new_country)
+        self.state.set_selected_country(new_country)
+        # Actualizar la hora inmediatamente
+        angles = self.clock_service.update_from_system()
+        self.state.set_angles_dict(angles)
+        self.state.set_manual_mode(False)
+        self.input_handler.active_hand = None

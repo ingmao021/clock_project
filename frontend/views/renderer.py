@@ -99,3 +99,24 @@ class Renderer:
         pygame.draw.circle(surface, ui_constants.COLOR_CENTER_PIN, self.center, ui_constants.CENTER_PIN_RADIUS)
 
         return hour_end, minute_end, second_end
+
+    def draw_country_selector(self, surface, selector, current_country):
+        """
+        Dibuja el selector de países.
+
+        Args:
+            surface: Superficie de pygame
+            selector: Instancia de CountrySelector
+            current_country: País actual
+        """
+        selector.draw(surface, current_country)
+
+    def draw_current_timezone(self, surface, current_display):
+        """
+        Dibuja el texto de la zona horaria actual.
+
+        Args:
+            surface: Superficie de pygame
+            current_display: Nombre de la ciudad y país actual
+        """
+        font = pygame.font.SysFont(ui_constants.FONT_NAME, 7, ui_constants.FONT_BOLD)

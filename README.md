@@ -16,6 +16,18 @@ El sistema se sincroniza automáticamente con la hora del sistema, pero también
 
 Al ajustar manualmente la hora, el reloj continúa su ejecución desde el nuevo valor definido. Además, puedes restablecer la hora actual presionando la tecla **`R`**.
 
+Se puede elijir un pais para mira la hora actual de la ciudad principal de ese pais, las opciones son:
+- USA (NY)
+- USA (LA)
+- UK (London)
+- España (Madrid)
+- Japón (Tokyo)
+- China (Shanghai)
+- India (Kolkata)
+- Australia (Sydney)
+- Brasil (Sao Paulo)
+- México (Mexico City)
+
 ---
 
 ## ✨ Características

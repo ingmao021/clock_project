@@ -13,6 +13,7 @@ class ClockState:
         self.manual_mode = False
         self.manual_seconds = None
         self.hands_ends = (None, None, None)  # (hour_end, minute_end, second_end)
+        self.selected_country = "Colombia"  # País por defecto
 
     def set_angles(self, hour, minute, second):
         """
@@ -87,10 +88,28 @@ class ClockState:
         """
         return self.hands_ends
 
+    def set_selected_country(self, country):
+        """
+        Establece el país seleccionado.
+
+        Args:
+            country: Nombre del país
+        """
+        self.selected_country = country
+
+    def get_selected_country(self):
+        """
+        Obtiene el país seleccionado.
+
+        Returns:
+            Nombre del país
+        """
+        return self.selected_country
+
     def reset(self):
         """Reinicia el estado del reloj a valores por defecto."""
         self.clock_hands_angles = {'hour': 90, 'minute': 90, 'second': 90}
         self.manual_mode = False
         self.manual_seconds = None
         self.hands_ends = (None, None, None)
-
+        self.selected_country = "Colombia"

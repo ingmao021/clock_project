@@ -3,7 +3,7 @@ Servicio de reloj - Orquestación de la lógica del reloj
 Gestiona sincronización, modo manual y estado general
 """
 from backend.services.time_service import TimeService
-from config import settings
+from backend.services.timezone_service import TimezoneService
 
 
 class ClockService:
@@ -12,6 +12,7 @@ class ClockService:
     def __init__(self):
         """Inicializa el servicio del reloj."""
         self.time_service = TimeService()
+        self.timezone_service = TimezoneService()
         self.manual_mode = False
         self.manual_seconds = None
 
@@ -24,7 +25,7 @@ class ClockService:
         """
         self.manual_mode = False
         self.manual_seconds = None
-        return self.time_service.get_system_time_angles()
+        return self.time_service.get_system_time_angles(self.timezone_service.current_timezone)
 
     def start_manual_mode(self, clock_hands_angles):
         """
@@ -86,3 +87,29 @@ class ClockService:
         if self.manual_mode:
             self.manual_seconds = self.time_service.angles_to_seconds(clock_hands_angles)
 
+    def set_timezone(self, country_name):
+        """
+        Establece la zona horaria para un país.
+
+        Args:
+            country_name: Nombre del país
+        """
+        self.timezone_service.set_timezone(country_name)
+
+    def get_current_country(self):
+        """
+        Obtiene el país actualmente seleccionado.
+
+        Returns:
+            Nombre del país
+        """
+        return self.timezone_service.get_current_country()
+
+    def get_available_countries(self):
+        """
+        Obtiene la lista de países disponibles.
+
+        Returns:
+            Lista de países
+        """
+        return self.timezone_service.get_available_countries()

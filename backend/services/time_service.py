@@ -3,6 +3,7 @@ Servicio de tiempo - Gestiona la lógica de conversión de tiempo
 Responsable de sincronizar con hora del sistema y conversiones
 """
 import time
+from datetime import datetime
 from backend.utils.converters import angles_to_time_seconds, time_seconds_to_angles
 from config import settings
 
@@ -11,32 +12,50 @@ class TimeService:
     """Servicio que maneja toda la lógica relacionada con el tiempo."""
 
     @staticmethod
-    def get_system_time_seconds():
+    def get_system_time_seconds(tz=None):
         """
         Obtiene los segundos actuales del sistema en formato 12 horas.
+
+        Args:
+            tz: Zona horaria (pytz.timezone), si None usa localtime
 
         Returns:
             Segundos totales (0-43200 para 12 horas)
         """
-        t = time.localtime()
-        hour = t.tm_hour % 12
-        minute = t.tm_min
-        second = t.tm_sec
+        if tz:
+            now = datetime.now(tz)
+            hour = now.hour % 12
+            minute = now.minute
+            second = now.second
+        else:
+            t = time.localtime()
+            hour = t.tm_hour % 12
+            minute = t.tm_min
+            second = t.tm_sec
 
         return hour * settings.SECONDS_PER_HOUR + minute * 60 + second
 
     @staticmethod
-    def get_system_time_angles():
+    def get_system_time_angles(tz=None):
         """
         Obtiene los ángulos de las manecillas basado en la hora del sistema.
+
+        Args:
+            tz: Zona horaria (pytz.timezone), si None usa localtime
 
         Returns:
             Dict con 'hour', 'minute', 'second' en grados
         """
-        t = time.localtime()
-        sec = t.tm_sec
-        minute = t.tm_min
-        hour = t.tm_hour % 12
+        if tz:
+            now = datetime.now(tz)
+            sec = now.second
+            minute = now.minute
+            hour = now.hour % 12
+        else:
+            t = time.localtime()
+            sec = t.tm_sec
+            minute = t.tm_min
+            hour = t.tm_hour % 12
 
         angles = {
             'second': sec * settings.DEGREES_PER_SECOND,
@@ -85,4 +104,3 @@ class TimeService:
             Segundos totales
         """
         return angles_to_time_seconds(clock_hands_angles)
-
