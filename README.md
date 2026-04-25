@@ -39,10 +39,10 @@ Se pueden elegir entre 4 modelos de reloj con estilos visuales distintos:
 
 - 🕐 Visualización analógica en tiempo real
 - 🔄 Sincronización automática con la hora del sistema
-- 🖱️ Interacción mediante arrastre de manecillas
-- ⚙️ Modo manual persistente tras ajustes
-- 🔁 Reinicio rápido a la hora actual (`R`)
-
+-  ⌨️ cambio de fondo interactivo con flechas del teclado
+- 🌍 Selección de zona horaria por país 
+- 🎨 Cuatro estilos de reloj personalizables
+- 📱 Interfaz gráfica intuitiva y atractiva
 ---
 
 ## 🧠 Estructura de Datos
@@ -72,10 +72,14 @@ Desde la powershell o cmd, ejecuta el siguiente comando / si no funciona ábrelo
 ```bash
 winget install Python.Python.3.11
 ```
+#### Realiza este pasi si python no se agrega automáticamente a las variables de entorno después de la instalación:
+
+```bash
 Escribe en la barra de búsqueda "variables de entorno" y
 selecciona la opción "Editar las variables de entorno del sistema".
 En la ventana que se abre, haz clic en el botón "Variables de entorno". 
 En la sección "Variables del Usuario o Sistema", busca la variable llamada "Path" y haz clic en "Editar". 
+```
 
 Deberia aparecer dos rutas como esta:
 
