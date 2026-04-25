@@ -12,9 +12,9 @@
 
 Aplicación interactiva desarrollada en **Python** que representa un reloj en formato **analógico**.
 
-El sistema se sincroniza automáticamente con la hora del sistema, pero también permite la **manipulación manual de las manecillas** mediante interacción con el mouse.
+El sistema se sincroniza automáticamente con la hora del sistema.
 
-Al ajustar manualmente la hora, el reloj continúa su ejecución desde el nuevo valor definido. Además, puedes restablecer la hora actual presionando la tecla **`R`**.
+Se puede elegir diferentes fondos para el reloj usando las flechas del teclado (`←` y `→`).
 
 Se puede elijir un pais para mira la hora actual de la ciudad principal de ese pais, las opciones son:
 - USA (NY)
