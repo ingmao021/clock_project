@@ -26,7 +26,7 @@ class Renderer:
         """
         self.width = width
         self.height = height
-        self.center = (width // 1.7, 250)
+        self.center = ui_constants.CLOCK_CENTER
         self.radius = radius
         self.model = model
         self.config = settings.MODEL_CONFIGS[self.model]
@@ -47,7 +47,7 @@ class Renderer:
 
     def draw_clock_face(self, surface):
         """
-        Dibuja la cara del reloj (fondo, borde, marcas y números).
+        Dibuja la cara del reloj ( borde, marcas y números).
 
         Args:
             surface: Superficie de pygame para dibujar

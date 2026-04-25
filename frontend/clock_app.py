@@ -18,11 +18,12 @@ class ClockApp:
         # Inicializar pantalla
         self.screen = Screen()
 
-        # Inicializar servicio de UI
+        # Inicializar servicio de UI (pasar referencia de screen)
         self.ui_service = UIService(
             ui_constants.APP_WIDTH,
             ui_constants.APP_HEIGHT,
-            ui_constants.CLOCK_RADIUS
+            ui_constants.CLOCK_RADIUS,
+            self.screen
         )
         self.ui_service.initialize()
 

@@ -26,18 +26,54 @@ class Screen:
         # Establecer título de la ventana
         pygame.display.set_caption(ui_constants.WINDOW_TITLE)
 
-        # Cargar fondo
-        try:
-            self.background = pygame.image.load(ui_constants.ASSET_BACKGROUND_PATH)
-            self.background = pygame.transform.scale(self.background, (self.width, self.height))
-        except pygame.error as e:
-            print(f"Aviso: No se pudo cargar el fondo: {e}")
-            self.background = None
+        # Inicializar lista de fondos
+        self.backgrounds_paths = ui_constants.ASSET_BACKGROUNDS
+        self.current_background_index = 0
+        self.backgrounds = []
+        self._load_all_backgrounds()
+
+    def _load_all_backgrounds(self):
+        """Carga todos los fondos disponibles."""
+        self.backgrounds = []
+        for path in self.backgrounds_paths:
+            try:
+                bg = pygame.image.load(path)
+                bg = pygame.transform.scale(bg, (self.width, self.height))
+                self.backgrounds.append(bg)
+            except pygame.error as e:
+                print(f"Aviso: No se pudo cargar el fondo {path}: {e}")
+                self.backgrounds.append(None)
+
+    def set_background(self, index):
+        """
+        Establece el fondo actual por índice.
+
+        Args:
+            index: Índice del fondo (0 a len(backgrounds)-1)
+        """
+        if 0 <= index < len(self.backgrounds):
+            self.current_background_index = index
+
+    def next_background(self):
+        """Cambia al siguiente fondo (navegación cíclica)."""
+        self.current_background_index = (self.current_background_index + 1) % len(self.backgrounds)
+
+    def prev_background(self):
+        """Cambia al fondo anterior (navegación cíclica)."""
+        self.current_background_index = (self.current_background_index - 1) % len(self.backgrounds)
+
+    @property
+    def background(self):
+        """Obtiene el fondo actual."""
+        if self.backgrounds and self.current_background_index < len(self.backgrounds):
+            return self.backgrounds[self.current_background_index]
+        return None
 
     def draw_background(self):
         """Dibuja el fondo en la pantalla."""
-        if self.background:
-            self.screen.blit(self.background, (0, 0))
+        bg = self.background
+        if bg:
+            self.screen.blit(bg, (0, 0))
 
     def clear(self):
         """Limpia la pantalla con color negro."""

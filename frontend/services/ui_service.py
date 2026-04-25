@@ -14,7 +14,7 @@ import pygame
 class UIService:
     """Servicio que orquesta las interacciones del UI."""
 
-    def __init__(self, width, height, radius):
+    def __init__(self, width, height, radius, screen=None):
         """
         Inicializa el servicio de UI.
 
@@ -22,9 +22,11 @@ class UIService:
             width: Ancho de la pantalla
             height: Alto de la pantalla
             radius: Radio del reloj
+            screen: Referencia a la pantalla (para cambiar fondos)
         """
         self.state = ClockState()
         self.clock_service = ClockService()
+        self.screen = screen
         self.renderer = Renderer(width, height, radius, self.state.get_selected_model())
         self.input_handler = InputHandler(self.renderer.center)
 
@@ -61,15 +63,6 @@ class UIService:
             hands_ends
         )
 
-        if action == "reset":
-            self._handle_reset()
-        elif action == "start_manual":
-            self._handle_start_manual()
-        elif action == "end_drag":
-            self._handle_end_drag()
-        elif action == "update_angle":
-            self._handle_update_angle(data)
-
         # Manejar clics en el selector de países
         if event.type == pygame.MOUSEBUTTONDOWN:
             selected_country = self.country_selector.handle_click(event.pos)
@@ -81,6 +74,12 @@ class UIService:
             if selected_model:
                 self._handle_model_change(selected_model)
 
+        # Manejar cambios de fondo
+        if action == "next_background":
+            self._handle_next_background()
+        elif action == "prev_background":
+            self._handle_prev_background()
+
         return action
 
     def update(self, delta_time):
@@ -90,28 +89,9 @@ class UIService:
         Args:
             delta_time: Tiempo transcurrido en segundos
         """
-        if self.input_handler.active_hand is not None:
-            # Pausa la actualización temporal durante el arrastre
-            return
-        # Si está en modo manual pero no se está arrastrando, continuar con el tiempo
-        if self.state.is_manual_mode():
-            angles = self.clock_service.update_manual_mode(delta_time)
-            if angles:
-                self.state.set_angles_dict(angles)
-        else:
-            # Modo automático: sincronizar con hora del sistema
-            angles = self.clock_service.update_from_system()
-            self.state.set_angles_dict(angles)
-
-        """
-        if self.state.is_manual_mode():
-            angles = self.clock_service.update_manual_mode(delta_time)
-            if angles:
-                self.state.set_angles_dict(angles)
-        else:
-            angles = self.clock_service.update_from_system()
-            self.state.set_angles_dict(angles)
-        """
+        # Modo automático: sincronizar con hora del sistema
+        angles = self.clock_service.update_from_system()
+        self.state.set_angles_dict(angles)
 
     def render(self, surface):
         """
@@ -190,3 +170,14 @@ class UIService:
         """
         self.state.set_selected_model(new_model)
         self.renderer.set_model(new_model)
+
+    def _handle_next_background(self):
+        """Cambia al siguiente fondo."""
+        if self.screen:
+            self.screen.next_background()
+
+    def _handle_prev_background(self):
+        """Cambia al fondo anterior."""
+        if self.screen:
+            self.screen.prev_background()
+

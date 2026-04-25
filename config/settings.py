@@ -4,14 +4,20 @@ Contiene constantes globales para colores, dimensiones y rutas
 """
 
 # ==================== RESOLUCIÓN Y GEOMETRÍA ====================
-APP_WIDTH = 800
-APP_HEIGHT = 800
-CLOCK_CENTER = (APP_WIDTH // 2, 300)
-CLOCK_RADIUS = 180
+APP_WIDTH = 900
+APP_HEIGHT = 750
+CLOCK_CENTER = (APP_WIDTH // 1.8, 250)
+CLOCK_RADIUS = 140
 
 # ==================== RUTAS DE ASSETS ====================
 ASSET_ICON_PATH = "assets/reloj.png"
-ASSET_BACKGROUND_PATH = "assets/fondo.png"
+ASSET_BACKGROUND_PATH = "assets/fondo.jpg"
+ASSET_BACKGROUNDS = [
+    "assets/fondo.jpg",
+    "assets/fondo1.jpg",
+    "assets/fondo2.jpg",
+    "assets/fondo3.jpg",
+]
 
 # ==================== COLORES (RGB) ====================
 COLOR_CLOCK_FACE = (255, 250, 240)  # Beige claro (fondo del reloj)
