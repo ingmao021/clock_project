@@ -33,11 +33,11 @@ class UIService:
         # Inicializar selector de países
         countries = self.clock_service.get_available_countries()
         display_names = [self.clock_service.timezone_service.get_display_name(c) for c in countries]
-        self.country_selector = CountrySelector(countries, display_names, 15, 15, 255, 35)
+        self.country_selector = CountrySelector(countries, display_names, 15, 15, 205, 35)
         self.country_selector.set_country(self.clock_service.get_current_country())
 
         # Inicializar selector de modelos
-        self.model_selector = ModelSelector(650, 15, 100, 35)
+        self.model_selector = ModelSelector(775, 15, 100, 35)
         self.model_selector.set_model(self.state.get_selected_model())
 
     def initialize(self):
